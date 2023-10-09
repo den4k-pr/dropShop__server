@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = "mongodb+srv://den4ikyakov:F8Q3pEloHWUcio5F@cluster0.ofdsl0x.mongodb.net/dropShop"
+  url      = "mongodb+srv://den4ikyakov:F8Q3pEloHWUcio5F@cluster0.ofdsl0x.mongodb.net"
 }
 
 model User {
