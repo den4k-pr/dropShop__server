@@ -3,17 +3,24 @@ import { AppModule } from './app.module';
 import { PrismaService } from './prisma.service';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  try {
+    const app = await NestFactory.create(AppModule);
 
-  const prismaService = app.get(PrismaService);
-  await prismaService.enableShutdownHooks(app);
+    const prismaService = app.get(PrismaService);
+    await prismaService.enableShutdownHooks(app);
 
-  app.enableShutdownHooks();
-  app.setGlobalPrefix('api');
-  app.enableCors();
+    app.setGlobalPrefix('api');
+    app.enableCors();
 
-  const port = process.env.PORT || 3000;
+    const port = process.env.PORT || 3000;
 
-  await app.listen(port);
+    await app.listen(port, () => {
+      console.log(`Application is listening on port ${port}`);
+    });
+  } catch (error) {
+    console.error('Error during application bootstrapping:', error);
+    throw error;
+  }
 }
+
 bootstrap()
